@@ -1,8 +1,10 @@
 {
+        "name": "ns_basic",
+        "version": "1.0.0",
 	"description": "NativeScript Application",
 	"license": "SEE LICENSE IN <your-license-filename>",
 	"readme": "NativeScript Application",
-	"repository": "<fill-your-repository-here>",
+	"repository": "https://github.com/maatthc/ns_basic.git",
 	"nativescript": {
 		"id": "br.maat.ns_basic",
 		"tns-ios": {
