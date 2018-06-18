@@ -1,12 +1,7 @@
-# Empty NativeScript Angular Template
+# NativeScript Angular Example of using the plugin Image Picker
 
-This template creates a empty "Hello, world" NativeScript app using TypeScript and Angular.
+This is a  NativeScript v4 using TypeScript and Angular.
 
-You can create a new app that uses this template with either the `--template` option.
+It makes use of the plugin "nativescript-imagepicker" to have access to the local gallery, the modules "file-system" and "image-source" to save the images to your own app container and the module "application-settings" to save you picture name.
 
-```
-tns create my-app-name --template https://github.com/maatthc/ns_basic.git
-```
-
-
-> Why do I need it: You don't! I only create this as I do create many simple projects and I had to remove all extras all the time.
+> Why : To show in a simple way how to implement a simple app without complexity.

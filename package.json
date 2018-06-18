@@ -1,12 +1,12 @@
 {
-        "name": "ns_basic",
-        "version": "1.0.0",
+	"name": "ns_imagepicker",
+	"version": "1.0.0",
 	"description": "NativeScript Application",
 	"license": "SEE LICENSE IN <your-license-filename>",
 	"readme": "NativeScript Application",
 	"repository": "https://github.com/maatthc/ns_basic.git",
 	"nativescript": {
-		"id": "br.maat.ns_basic",
+		"id": "br.maat.ns_imagepicker",
 		"tns-ios": {
 			"version": "4.1.0"
 		}
@@ -22,6 +22,7 @@
 		"@angular/platform-browser-dynamic": "~6.0.0",
 		"@angular/router": "~6.0.0",
 		"nativescript-angular": "~6.0.0",
+		"nativescript-imagepicker": "^6.0.2",
 		"nativescript-theme-core": "~1.0.4",
 		"reflect-metadata": "~0.1.8",
 		"rxjs": "~6.1.0",

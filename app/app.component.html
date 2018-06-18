@@ -1,1 +1,5 @@
-<Label text="Hello World" horizontalAlignment="center"></Label>
+<ActionBar title="Picture"></ActionBar>
+<StackLayout>
+    <Image *ngIf = "myImage" [src]="myImage" stretch="aspectFill"  class="profileImage" ></Image>
+    <Button class="btn btn-outline" text="Choose picture.." horizontalAlignment="center" (tap)="getPicture()"></Button>
+</StackLayout>
