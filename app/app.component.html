@@ -1,5 +1,25 @@
-<ActionBar title="Picture"></ActionBar>
-<StackLayout>
-    <Image *ngIf = "myImage" [src]="myImage" stretch="aspectFill"  class="profileImage" ></Image>
-    <Button class="btn btn-outline" text="Choose picture.." horizontalAlignment="center" (tap)="getPicture()"></Button>
-</StackLayout>
+<ActionBar title="Settings" automationText="ActionBar" class="action-bar">
+        <NavigationButton tap="goBack"></NavigationButton>
+        <ActionItem tap="saveChangesSettings" padding="20" margin="30" android:text="DONE" ios:text="Done" ios.position="right"></ActionItem>
+</ActionBar>
+<GridLayout class="sidedrawer sidedrawer-left" rows="*, auto">
+    <StackLayout row="0" class="sidedrawer-header">
+        <Label *ngIf = "!profileImage" class="sidedrawer-header-image profileImage fa" text="&#xf2bd;" (tap)="getPicture()"></Label>
+        <Image *ngIf = "profileImage" [src]="profileImage" stretch="aspectFill"  class="profileImage" (tap)="getPicture()"></Image>
+        <Label class="sidedrawer-header-brand" [text]="settings.name"></Label>
+        <Label class="footnote" [text]="settings.email"></Label>
+    </StackLayout>
+    <RadDataForm row="1" tkExampleTitle tkToggleNavButton [source]="settings">
+        <TKEntityProperty tkDataFormProperty name="name" displayName="Name" index="0"></TKEntityProperty>
+        <TKEntityProperty tkDataFormProperty name="email" displayName="E-Mail" index="1">
+        <TKEntityProperty tkDataFormProperty name="dateBirth" displayName="Date of Birth" index="2">
+            <TKPropertyEditor tkEntityPropertyEditor type="Number"></TKPropertyEditor>
+        </TKEntityProperty>
+            <TKPropertyEditor tkEntityPropertyEditor type="Email"></TKPropertyEditor>
+        </TKEntityProperty>
+        <TKEntityProperty tkDataFormProperty name="sex" displayName="Sex" index="3"></TKEntityProperty>
+        <TKEntityProperty tkDataFormProperty name="loyalty" displayName="Loyalty Card" index="4">
+            <TKPropertyEditor tkEntityPropertyEditor type="Number"></TKPropertyEditor>
+        </TKEntityProperty>
+    </RadDataForm>
+</GridLayout>

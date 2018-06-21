@@ -3,16 +3,10 @@ import * as imageSourceModule from  "image-source";
 import * as fs from "file-system";
 import * as imagepicker from "nativescript-imagepicker";
 import {
-    getBoolean,
-    setBoolean,
-    getNumber,
-    setNumber,
     getString,
     setString,
-    hasKey,
-    remove,
-    clear
 } from "application-settings";
+import {Settings} from "./settings";
 
 @Component({
     selector: "ns-app",
@@ -21,18 +15,43 @@ import {
 })
 
 export class AppComponent implements OnInit { 
-    public myImage : any;
-    public myImageFileName: string;
+    public profileImage : any;
+    private _settings: Settings;
 
     public ngOnInit(){
-        this.myImageFileName = "profile.png";
         console.log("App started.");
-        let myImageName = "";
+        this.loadSettings();
+    }
 
-        if (myImageName = getString("profileImage")){
-            this.myImage= imageSourceModule.fromFile(myImageName);
-            // console.log("----------->>>> " + myImageName);
+    private loadSettings(){
+        let mySettings :string = "";
+        let myImageName = "";
+        if (mySettings = getString("settings")){
+            console.log("There is already a existing settings..")
+            this._settings = JSON.parse(mySettings);
+            if (this._settings.profileImageFileName != ""){
+                this.profileImage = imageSourceModule.fromFile(this._settings.profileImageFileName);
+            }
+        } else {
+            this._settings = {
+                name: "You name",
+                dateBirth: 0,
+                email: "your@email",
+                sex: "",
+                loyalty: 0,
+                phone: 0,
+                profileImageFileName: "profile.png",
+            };
         }
+        console.dir(JSON.stringify(this._settings));
+    }
+
+    get settings(): Settings {
+        return this._settings;
+    }
+
+    private saveChangesSettings(){
+        return;
     }
 
     getPicture(){
@@ -45,22 +64,22 @@ export class AppComponent implements OnInit {
             return context.present();
         })
         .then(function(selection) {
-            that.myImage = selection.length > 0 ? selection[0] : null;
-            // console.dir(selection)
+            that.profileImage = selection.length > 0 ? selection[0] : null;
+            // console.dir(that.profileImage);
             selection.forEach(function(selected_item) {
                 // console.dir(selected_item)
                 selected_item.getImageAsync(function(imagesource){
-                    // console.debug(imagesource);
+                    console.log(imagesource);
                     let folder = fs.knownFolders.documents();
-                    let path = fs.path.join(folder.path, that.myImageFileName);
+                    let path = fs.path.join(folder.path, that._settings.profileImageFileName);
                     const img = imageSourceModule.fromNativeSource(imagesource);
+                    console.debug(img);
                     let saved = img.saveToFile(path, "png");
                     if(saved){
                         // console.log(path);
-                        setString("profileImage", path);
+                        setString("settings", JSON.stringify(that._settings));
                     }                
                 })
-
             });
         }).catch(function (e) {
             console.log(e);
